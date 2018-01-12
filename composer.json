@@ -1,0 +1,12 @@
+{
+    "name": "smedlock/328/dating",
+    "authors":[
+        {
+          "name": "Scott Medlock",
+          "email": "smedlock@mail.greenriver.edu"
+        }
+    ],
+        "require": {
+        "bcosca/fatfree-core": "dev-master"
+    }
+}
