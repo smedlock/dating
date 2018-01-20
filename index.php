@@ -1,4 +1,10 @@
 <?php
+/*
+ * Scott Medlock
+ * 1-19-2018
+ * index page for this dating project.
+ */
+
 
 //Require the autoload file
 require_once('vendor/autoload.php');
