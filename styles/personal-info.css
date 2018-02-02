@@ -9,3 +9,7 @@
     padding: 6px;
     text-align: center;
 }
+
+.nav-link {
+    font-weight: bold;
+}

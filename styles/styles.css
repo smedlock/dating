@@ -10,5 +10,9 @@
 #navigation-bar {
     border: 2px solid lightgrey;
     background-color: #EEEEEE;
-    text-
+    font-weight: bold;
+}
+
+.nav-link {
+    font-weight: bold;
 }
