@@ -1,10 +1,4 @@
 <?php
-/*
- * Scott Medlock
- * 1-19-2018
- * index page for this dating project.
- */
-
 
 //Require the autoload file
 require_once('vendor/autoload.php');
@@ -19,8 +13,12 @@ $f3->set('DEBUG', 3);
 $f3->route('GET /', function() {
     $view = new View;
     echo $view->render('pages/home.html');
-}
-);
+});
+
+$f3->route('GET /personal-info', function() {
+    $view = new View;
+    echo $view->render('pages/personal-info.html');
+});
 
 //Run Fat-Free
 $f3->run();
