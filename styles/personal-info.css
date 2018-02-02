@@ -1,0 +1,11 @@
+#page {
+    overflow: hidden;
+}
+
+#privacy-policy {
+    background-color: #EEEEEE;
+    border: 2px solid lightgrey;
+    border-radius: 5px;
+    padding: 6px;
+    text-align: center;
+}

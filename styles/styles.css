@@ -1,8 +1,14 @@
 #page {
-    border: 1px solid lightgrey;
-    border-radius: 10px;
+    border: 2px solid lightgrey;
+    border-radius: 5px;
     padding: 16px;
     padding-right: 30px;
     padding-left: 30px;
     font-family: Arial;
+}
+
+#navigation-bar {
+    border: 2px solid lightgrey;
+    background-color: #EEEEEE;
+    text-
 }
