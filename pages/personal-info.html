@@ -24,23 +24,55 @@
             <div class="row">
                 <div class="col-sm-8">
                     <div class="form-group">
-                        <label for="firstName" class="font-weight-bold">First Name</label>
-                        <input type="text" class="form-control" name="firstName" id="firstName">
+                        <label for="firstName" class="font-weight-bold">First Name
+                            <check if="{{ isset(@invalidFirstName) }}">
+                                <span class="error font-weight-normal"> - Please enter a first name</span>
+                            </check>
+                        </label>
+                        <input type="text" class="form-control" name="firstName" id="firstName"
+                            <check if="{{ isset(@firstName) }}">
+                                value="{{ @firstName }}"
+                            </check>
+                        >
                     </div>
                     <div class="form-group">
-                        <label for="lastName" class="font-weight-bold">Last Name</label>
-                        <input type="text" class="form-control" name="lastName" id="lastName">
+                        <label for="lastName" class="font-weight-bold">Last Name
+                            <check if="{{ isset(@invalidLastName) }}">
+                                <span class="error font-weight-normal"> - Please enter a last name</span>
+                            </check>
+                        </label>
+                        <input type="text" class="form-control" name="lastName" id="lastName"
+                            <check if="{{ isset(@lastName) }}">
+                                value="{{ @lastName }}"
+                            </check>
+                        >
                     </div>
                     <div class="form-group">
-                        <label for="age" class="font-weight-bold">Age</label>
-                        <input type="text" class="form-control" name="age" id="age">
+                        <label for="age" class="font-weight-bold">Age
+                            <check if="{{ isset(@invalidAge) }}">
+                                <span class="error font-weight-normal"> - You must be 18 or older</span>
+                            </check>
+                        </label>
+                        <input type="text" class="form-control" name="age" id="age"
+                            <check if="{{ isset(@age) }}">
+                                value="{{ @age }}"
+                            </check>
+                        >
                     </div>
                     <p class="font-weight-bold">Gender</p>
-                    <label class="radio-inline"><input type="radio" name="gender" value="male">&nbsp;Male</label>
-                    <label class="radio-inline"><input type="radio" name="gender" value="female">&nbsp;Female</label>
+                    <label class="radio-inline"><input type="radio" name="gender" value="male" <check if="{{ @gender == male }}">checked="checked"</check>>&nbsp;Male</label>
+                    <label class="radio-inline"><input type="radio" name="gender" value="female" <check if="{{ @gender == female }}">checked="checked"</check>>&nbsp;Female</label>
                     <div class="form-group">
-                        <label for="phoneNumber" class="font-weight-bold">Phone Number</label>
-                        <input type="tel" class="form-control" name="phoneNumber" id="phoneNumber">
+                        <label for="phone" class="font-weight-bold">Phone Number
+                            <check if="{{ isset(@invalidPhone) }}">
+                                <span class="error font-weight-normal"> - Please enter a valid phone number</span>
+                            </check>
+                        </label>
+                        <input type="tel" class="form-control" name="phone" id="phone"
+                            <check if="{{ isset(@phone) }}">
+                                value="{{ @phone }}"
+                            </check>
+                        >
                     </div>
                 </div>
                 <div class="col-sm-4">
@@ -50,7 +82,7 @@
                     </p>
                 </div>
             </div>
-            <button type="submit" name="submit" class="btn btn-primary float-right" id="next-button">Next ></button>
+            <button type="submit" name="submit" value="submit" class="btn btn-primary float-right" id="next-button">Next ></button>
         </form>
     </div>
 

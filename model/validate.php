@@ -15,7 +15,7 @@
 
     function validPhone($phone) {
         // https://stackoverflow.com/questions/3090862/how-to-validate-phone-number-using-php
-        return preg_match("/^[0-9]{3}-[0-9]{4}-[0-9]{4}$/", $phone);
+        return preg_match("/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/", $phone);
     }
 
     function validOutdoor($list) {

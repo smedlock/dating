@@ -17,3 +17,7 @@
 .nav-link {
     font-weight: bold;
 }
+
+.error {
+    color: red;
+}
