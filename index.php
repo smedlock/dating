@@ -24,16 +24,23 @@ $f3->route('GET /personal-info', function() {
 });
 
 $f3->route('POST /create-profile', function() {
+    if ($_POST['submit']) {
+        $isValid = true;
+        if (validName($_POST['firstName']))
+    }
+    print_r($_POST);
     $template = new Template;
     echo $template->render('pages/create-profile.html');
 });
 
 $f3->route('POST /interests', function() {
+    print_r($_POST);
     $template = new Template;
     echo $template->render('pages/interests.html');
 });
 
 $f3->route('POST /profile-summary', function() {
+    print_r($_POST);
     $template = new Template;
     echo $template->render('pages/profile-summary.html');
 });
