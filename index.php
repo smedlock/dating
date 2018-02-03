@@ -28,5 +28,10 @@ $f3->route('POST /create-profile', function() {
     echo $template->render('pages/create-profile.html');
 });
 
+$f3->route('POST /interests', function() {
+    $template = new Template;
+    echo $template->render('pages/interests.html');
+});
+
 //Run Fat-Free
 $f3->run();
