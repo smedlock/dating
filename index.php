@@ -87,15 +87,61 @@ $f3->route('POST /create-profile', function($f3) {
 });
 
 $f3->route('POST /interests', function() {
-    print_r($_POST);
+
+    $_SESSION['email'] = $_POST['email'];
+    $_SESSION['state'] = $_POST['state'];
+    $_SESSION['seeking'] = $_POST['seeking'];
+    $_SESSION['biography'] = $_POST['biography'];
     $template = new Template;
     echo $template->render('pages/interests.html');
 });
 
-$f3->route('POST /profile-summary', function() {
-    print_r($_POST);
+$f3->route('POST /profile-summary', function($f3) {
+
     $template = new Template;
-    echo $template->render('pages/profile-summary.html');
+    if ($_POST['submit']) {
+        $isValid = true;
+        include('model/validate.php');
+
+        //variables for sticky
+        $indoor = $_POST['indoor'];
+        $outdoor = $_POST['outdoor'];
+        $f3->set('indoor', $indoor);
+        $f3->set('outdoor', $outdoor);
+
+        // validate form variables
+        if (validIndoor($indoor)) {
+            $f3->clear('invalidIndoor');
+        } else {
+            $f3->set('invalidIndoor', 'invalid');
+            $isValid = false;
+        }
+
+        if (validOutdoor($outdoor)) {
+            $f3->clear('invalidOutdoor');
+        } else {
+            $f3->set('invalidOutdoor', 'invalid');
+            $isValid = false;
+        }
+
+        // check for form validity
+        if ($isValid) {
+            $_SESSION['indoor'] = $_POST['indoor'];
+            $_SESSION['outdoor'] = $_POST['outdoor'];
+            $f3->set('firstName', $_SESSION['firstName']);
+            $f3->set('lastName', $_SESSION['lastName']);
+            $f3->set('gender', $_SESSION['gender']);
+            $f3->set('age', $_SESSION['age']);
+            $f3->set('phone', $_SESSION['phone']);
+            $f3->set('email', $_SESSION['email']);
+            $f3->set('state', $_SESSION['state']);
+            $f3->set('seeking', $_SESSION['seeking']);
+            $f3->set('biography', $_SESSION['biography']);
+            echo $template->render('pages/profile-summary.html');
+        } else {
+            echo $template->render('pages/interests.html');
+        }
+    }
 });
 
 //Run Fat-Free

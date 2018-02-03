@@ -23,7 +23,11 @@
     <form action="profile-summary" method="post">
         <!--$validList = array('hiking', 'biking', 'swimming', 'collecting', 'walking', 'climbing');
         $validList = array('tv', 'movies', 'cooking', 'board games', 'puzzles', 'reading', 'playing cards', 'video games');-->
-        <label class="font-weight-bold">In-door Interests</label>
+        <label class="font-weight-bold">In-door Interests
+            <check if="{{ isset(@invalidPhone) }}">
+                <span class="error font-weight-normal"> - Please check only the options available</span>
+            </check>
+        </label>
         <div class="row">
             <div class="col">
                 <div class="form-check mb-0">
@@ -46,71 +50,52 @@
                     <label class="form-check-label"><input class="form-check-input" type="checkbox" name="indoor[]" value="cooking">&nbsp;&nbsp;cooking</label>
                 </div>
                 <div class="form-check">
-                    <label class="form-check-label"><input class="form-check-input" type="checkbox" name="indoor[]" value="playing-cards">&nbsp;&nbsp;playing cards</label>
+                    <label class="form-check-label"><input class="form-check-input" type="checkbox" name="indoor[]" value="playing cards">&nbsp;&nbsp;playing cards</label>
                 </div>
             </div>
             <div class="col">
                 <div class="form-check mb-0">
-                    <label class="form-check-label"><input class="form-check-input" type="checkbox" name="indoor[]" value="board-games">&nbsp;&nbsp;board games</label>
+                    <label class="form-check-label"><input class="form-check-input" type="checkbox" name="indoor[]" value="board games">&nbsp;&nbsp;board games</label>
                 </div>
                 <div class="form-check">
-                    <label class="form-check-label"><input class="form-check-input" type="checkbox" name="indoor[]" value="video-games">&nbsp;&nbsp;video games</label>
+                    <label class="form-check-label"><input class="form-check-input" type="checkbox" name="indoor[]" value="video games">&nbsp;&nbsp;video games</label>
                 </div>
             </div>
         </div>
-        <label class="font-weight-bold">Out-door Interests</label>
+        <label class="font-weight-bold">Out-door Interests
+            <check if="{{ isset(@invalidPhone) }}">
+                <span class="error font-weight-normal"> - Please check only the options available</span>
+            </check>
+        </label>
         <div class="row">
             <div class="col">
                 <div class="form-check mb-0">
-                    <label class="form-check-label"><input class="form-check-input" type="checkbox" name="indoor[]" value="hiking">&nbsp;&nbsp;hiking</label>
+                    <label class="form-check-label"><input class="form-check-input" type="checkbox" name="outdoor[]" value="hiking">&nbsp;&nbsp;hiking</label>
                 </div>
                 <div class="form-check">
-                    <label class="form-check-label"><input class="form-check-input" type="checkbox" name="indoor[]" value="walking">&nbsp;&nbsp;walking</label>
+                    <label class="form-check-label"><input class="form-check-input" type="checkbox" name="outdoor[]" value="walking">&nbsp;&nbsp;walking</label>
                 </div>
             </div>
             <div class="col">
                 <div class="form-check mb-0">
-                    <label class="form-check-label"><input class="form-check-input" type="checkbox" name="indoor[]" value="biking">&nbsp;&nbsp;biking</label>
+                    <label class="form-check-label"><input class="form-check-input" type="checkbox" name="outdoor[]" value="biking">&nbsp;&nbsp;biking</label>
                 </div>
                 <div class="form-check">
-                    <label class="form-check-label"><input class="form-check-input" type="checkbox" name="indoor[]" value="climbing">&nbsp;&nbsp;climbing</label>
+                    <label class="form-check-label"><input class="form-check-input" type="checkbox" name="outdoor[]" value="climbing">&nbsp;&nbsp;climbing</label>
                 </div>
             </div>
             <div class="col">
                 <div class="form-check mb-0">
-                    <label class="form-check-label"><input class="form-check-input" type="checkbox" name="indoor[]" value="swimming">&nbsp;&nbsp;swimming</label>
+                    <label class="form-check-label"><input class="form-check-input" type="checkbox" name="outdoor[]" value="swimming">&nbsp;&nbsp;swimming</label>
                 </div>
             </div>
             <div class="col">
                 <div class="form-check mb-0">
-                    <label class="form-check-label"><input class="form-check-input" type="checkbox" name="indoor[]" value="collecting">&nbsp;&nbsp;collecting</label>
+                    <label class="form-check-label"><input class="form-check-input" type="checkbox" name="outdoor[]" value="collecting">&nbsp;&nbsp;collecting</label>
                 </div>
             </div>
         </div>
-        <!--
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="email" class="font-weight-bold">Email</label>
-                    <input type="email" class="form-control" id="email">
-                </div>
-                <div class="form-group">
-                    <label for="lastName" class="font-weight-bold">State</label>
-                    <input type="text" class="form-control" id="lastName">
-                </div>
-                <p class="font-weight-bold">Seeking</p>
-                <label class="radio-inline"><input type="radio" name="genderSeeking" value="male">&nbsp;Male</label>
-                <label class="radio-inline"><input type="radio" name="genderSeeking" value="female">&nbsp;Female</label>
-            </div>
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="biography" class="font-weight-bold">Biography</label>
-                    <textarea class="form-control" id="biography" rows="6" cols="50"></textarea>
-                </div>
-            </div>
-        </div>
-        -->
-        <button type="submit" class="btn btn-primary float-right" id="next-button">Next ></button>
+        <button type="submit" name="submit" value="submit" class="btn btn-primary float-right" id="next-button">Next ></button>
     </form>
 </div>
 
