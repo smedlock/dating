@@ -3,6 +3,9 @@
 //Require the autoload file
 require_once('vendor/autoload.php');
 
+//Start the session
+session_start();
+
 //Create an instance of the Base class
 $f3 = Base::instance();
 
