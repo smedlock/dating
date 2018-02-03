@@ -1,0 +1,24 @@
+table, th, td {
+    border: 1px solid lightgrey;
+}
+
+#contact-button {
+    margin: auto;
+}
+
+#info {
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    padding: 0px;
+    height: 100%;
+}
+
+.information, .information-bottom {
+    border-bottom: 1px solid lightgrey;
+    margin: 0px;
+    padding: 10px;
+}
+
+.information-bottom {
+    border-bottom: none;
+}
