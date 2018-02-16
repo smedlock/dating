@@ -24,7 +24,7 @@
         <!--$validList = array('hiking', 'biking', 'swimming', 'collecting', 'walking', 'climbing');
         $validList = array('tv', 'movies', 'cooking', 'board games', 'puzzles', 'reading', 'playing cards', 'video games');-->
         <label class="font-weight-bold">In-door Interests
-            <check if="{{ isset(@invalidPhone) }}">
+            <check if="{{ isset(@invalidIndoor) }}">
                 <span class="error font-weight-normal"> - Please check only the options available</span>
             </check>
         </label>
@@ -63,7 +63,7 @@
             </div>
         </div>
         <label class="font-weight-bold">Out-door Interests
-            <check if="{{ isset(@invalidPhone) }}">
+            <check if="{{ isset(@invalidOutdoor) }}">
                 <span class="error font-weight-normal"> - Please check only the options available</span>
             </check>
         </label>

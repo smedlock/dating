@@ -20,9 +20,11 @@
 
     function validOutdoor($list) {
         $validList = array('hiking', 'biking', 'swimming', 'collecting', 'walking', 'climbing');
-        foreach ($list as $item) {
-            if (!in_array($item, $validList)) {
-                return false;
+        if (isset($list)) {
+            foreach ($list as $item) {
+                if (!in_array($item, $validList)) {
+                    return false;
+                }
             }
         }
         return true;
@@ -30,9 +32,11 @@
 
     function validIndoor($list) {
         $validList = array('tv', 'movies', 'cooking', 'board games', 'puzzles', 'reading', 'playing cards', 'video games');
-        foreach ($list as $item) {
-            if (!in_array($item, $validList)) {
-                return false;
+        if (isset($list)) {
+            foreach ($list as $item) {
+                if (!in_array($item, $validList)) {
+                    return false;
+                }
             }
         }
         return true;
