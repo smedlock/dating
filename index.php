@@ -115,11 +115,8 @@ $f3->route('GET|POST /profile-summary', function($f3) {
     if ($_POST['submitInterests']) {
         include('model/validate.php');
 
-        //variables for sticky
-        $_SESSION['indoor'] = $_POST['indoor'];
-        $_SESSION['outdoor'] = $_POST['outdoor'];
-        $newMember->setInDoorInterests($_SESSION['indoor']);
-        $newMember->setOutDoorInterests($_SESSION['outdoor']);
+        $newMember->setInDoorInterests($_POST['indoor']);
+        $newMember->setOutDoorInterests($_POST['outdoor']);
 
         // validate form variables
         if (validIndoor($indoor)) {
