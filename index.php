@@ -72,11 +72,13 @@ $f3->route('POST /create-profile', function($f3) {
 
         // check for form validity
         if ($isValid) {
-            $_SESSION['firstName'] = $_POST['firstName'];
-            $_SESSION['lastName'] = $_POST['lastName'];
-            $_SESSION['age'] = $_POST['age'];
-            $_SESSION['gender'] = $_POST['gender'];
-            $_SESSION['phone'] = $_POST['phone'];
+            if (isset($_POST['premium'])) {
+                $newMember = new PremiumMember($firstName, $lastName, $age, $gender, $phone, "", "", "", "", array(), array());
+            } else {
+                $newMember = new Member($firstName, $lastName, $age, $gender, $phone, "", "", "", "");
+            }
+            $_SESSION['newMember'] = $newMember;
+
             echo $template->render('pages/create-profile.html');
         } else {
             echo $template->render('pages/personal-info.html');
@@ -86,21 +88,31 @@ $f3->route('POST /create-profile', function($f3) {
     }
 });
 
-$f3->route('POST /interests', function() {
+$f3->route('POST /interests', function($f3) {
 
-    $_SESSION['email'] = $_POST['email'];
-    $_SESSION['state'] = $_POST['state'];
-    $_SESSION['seeking'] = $_POST['seeking'];
-    $_SESSION['biography'] = $_POST['biography'];
+    $newMember = $_SESSION['newMember'];
+
+    $newMember->setEmail($_POST['email']);
+    $newMember->setState($_POST['state']);
+    $newMember->setSeeking($_POST['seeking']);
+    $newMember->setBio($_POST['biography']);
+
+    $_SESSION['newMember'] = $newMember;
+
+    if (get_class($newMember) == 'Member') {
+        $f3->reroute('/profile-summary');
+    }
+
     $template = new Template;
     echo $template->render('pages/interests.html');
 });
 
-$f3->route('POST /profile-summary', function($f3) {
+$f3->route('GET|POST /profile-summary', function($f3) {
 
     $template = new Template;
-    if ($_POST['submit']) {
-        $isValid = true;
+    $newMember = $_SESSION['newMember'];
+    $isValid = true;
+    if (get_class($newMember) == 'PremiumMember') {
         include('model/validate.php');
 
         //variables for sticky
@@ -123,24 +135,30 @@ $f3->route('POST /profile-summary', function($f3) {
             $f3->set('invalidOutdoor', 'invalid');
             $isValid = false;
         }
+    }
 
-        // check for form validity
-        if ($isValid) {
-            $_SESSION['indoor'] = $_POST['indoor'];
-            $_SESSION['outdoor'] = $_POST['outdoor'];
-            $f3->set('firstName', $_SESSION['firstName']);
-            $f3->set('lastName', $_SESSION['lastName']);
-            $f3->set('gender', $_SESSION['gender']);
-            $f3->set('age', $_SESSION['age']);
-            $f3->set('phone', $_SESSION['phone']);
-            $f3->set('email', $_SESSION['email']);
-            $f3->set('state', $_SESSION['state']);
-            $f3->set('seeking', $_SESSION['seeking']);
-            $f3->set('biography', $_SESSION['biography']);
-            echo $template->render('pages/profile-summary.html');
-        } else {
-            echo $template->render('pages/interests.html');
+    // check for form validity
+    if ($isValid) {
+        $_SESSION['indoor'] = $_POST['indoor'];
+        $_SESSION['outdoor'] = $_POST['outdoor'];
+
+
+        if (get_class($newMember) == "PremiumMember") {
+            $newMember->setInDoorInterests($_POST['indoor']);
+            $newMember->setOutDoorInterests($_POST['outdoor']);
         }
+        $f3->set('firstName', $newMember->getFName());
+        $f3->set('lastName', $newMember->getLName());
+        $f3->set('gender', $newMember->getGender());
+        $f3->set('age', $newMember->getAge());
+        $f3->set('phone', $newMember->getPhone());
+        $f3->set('email', $newMember->getEmail());
+        $f3->set('state', $newMember->getState());
+        $f3->set('seeking', $newMember->getSeeking());
+        $f3->set('biography', $newMember->getBio());
+        echo $template->render('pages/profile-summary.html');
+    } else {
+        echo $template->render('pages/interests.html');
     }
 });
 

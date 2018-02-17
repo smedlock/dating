@@ -1,12 +1,15 @@
 {
-    "name": "smedlock/328/dating",
-    "authors":[
-        {
-          "name": "Scott Medlock",
-          "email": "smedlock@mail.greenriver.edu"
-        }
-    ],
-        "require": {
-        "bcosca/fatfree-core": "dev-master"
+  "name": "smedlock/328/dating",
+  "authors":[
+    {
+      "name": "Scott Medlock",
+      "email": "smedlock@mail.greenriver.edu"
     }
+  ],
+  "require": {
+    "bcosca/fatfree-core": "dev-master"
+  },
+  "autoload": {
+    "classmap": ["classes/"]
+  }
 }

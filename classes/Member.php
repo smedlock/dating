@@ -15,8 +15,8 @@ class Member
     protected $phone;
     protected $email;
     protected $state;
-    protected $seeking
-    protected $bio
+    protected $seeking;
+    protected $bio;
 
     function __construct($fname, $lname, $age, $gender, $phone, $email, $state, $seeking, $bio)
     {
@@ -53,7 +53,7 @@ class Member
 
     public function getAge()
     {
-        return $this->Age;
+        return $this->age;
     }
 
     public function setAge($age)
