@@ -112,14 +112,14 @@ $f3->route('GET|POST /profile-summary', function($f3) {
     $template = new Template;
     $newMember = $_SESSION['newMember'];
     $isValid = true;
-    if (get_class($newMember) == 'PremiumMember') {
+    if ($_POST['submitInterests']) {
         include('model/validate.php');
 
         //variables for sticky
-        $indoor = $_POST['indoor'];
-        $outdoor = $_POST['outdoor'];
-        $f3->set('indoor', $indoor);
-        $f3->set('outdoor', $outdoor);
+        $_SESSION['indoor'] = $_POST['indoor'];
+        $_SESSION['outdoor'] = $_POST['outdoor'];
+        $newMember->setInDoorInterests($_SESSION['indoor']);
+        $newMember->setOutDoorInterests($_SESSION['outdoor']);
 
         // validate form variables
         if (validIndoor($indoor)) {
@@ -139,14 +139,12 @@ $f3->route('GET|POST /profile-summary', function($f3) {
 
     // check for form validity
     if ($isValid) {
-        $_SESSION['indoor'] = $_POST['indoor'];
-        $_SESSION['outdoor'] = $_POST['outdoor'];
-
 
         if (get_class($newMember) == "PremiumMember") {
-            $newMember->setInDoorInterests($_POST['indoor']);
-            $newMember->setOutDoorInterests($_POST['outdoor']);
+            $f3->set('indoor', $newMember->getInDoorInterests());
+            $f3->set('outdoor', $newMember->getOutDoorInterests());
         }
+
         $f3->set('firstName', $newMember->getFName());
         $f3->set('lastName', $newMember->getLName());
         $f3->set('gender', $newMember->getGender());
@@ -158,10 +156,7 @@ $f3->route('GET|POST /profile-summary', function($f3) {
         $f3->set('biography', $newMember->getBio());
 
         if (isset($_FILES['fileToUpload'])) {
-
             include('model/upload-image.php');
-
-
         }
 
         echo $template->render('pages/profile-summary.html');
