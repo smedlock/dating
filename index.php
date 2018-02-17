@@ -156,6 +156,14 @@ $f3->route('GET|POST /profile-summary', function($f3) {
         $f3->set('state', $newMember->getState());
         $f3->set('seeking', $newMember->getSeeking());
         $f3->set('biography', $newMember->getBio());
+
+        if (isset($_FILES['fileToUpload'])) {
+
+            include('model/upload-image.php');
+
+
+        }
+
         echo $template->render('pages/profile-summary.html');
     } else {
         echo $template->render('pages/interests.html');

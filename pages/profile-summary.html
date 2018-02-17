@@ -34,7 +34,15 @@
             </p>
         </div>
         <div class="col">
-            <img class="img-fluid rounded" src="images/unknown-person.png" alt="profile picture">
+            <check if="{{ @profilePicture }}">
+                <true><img class="img-fluid rounded" src="{{ @profilePicture }}" alt="profile picture"></true>
+                <false><img class="img-fluid rounded" src="images/unknown-person.png" alt="profile picture"></false>
+            </check>
+            <form action="profile-summary" method="post" enctype="multipart/form-data">
+                Select image to upload:
+                <input type="file" name="fileToUpload" id="fileToUpload">
+                <input type="submit" value="Upload Image" name="submit">
+            </form>
             <p>Biography</p>
             <p>{{ @biography }}</p>
         </div>
