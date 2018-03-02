@@ -18,6 +18,11 @@ $f3->route('GET /', function() {
     echo $template->render('pages/home.html');
 });
 
+$f3->route('GET /admin', function() {
+    $template = new Template;
+    echo $template->render('pages/admin.html');
+});
+
 $f3->route('GET /personal-info', function() {
     $template = new Template;
     echo $template->render('pages/personal-info.html');
