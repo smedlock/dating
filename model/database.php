@@ -7,6 +7,8 @@
  */
 
 /*
+sql statement for creating Members table
+
 CREATE TABLE Members (
     member_id int NOT NULL AUTO_INCREMENT,
     fname varchar(30) NOT NULL,
@@ -25,26 +27,49 @@ CREATE TABLE Members (
 );
  */
 
+/**
+ * Class Database is stores a database connection to the Members table
+ *
+ * This will add rows to the table and also get all of the rows.
+ *
+ * @author Scott Medlock
+ * @copyright 2018
+ */
 class Database
 {
 
-    private $cnxn;
+    private $cnxn; // PDO object
 
+    /**
+     * Database constructor.
+     */
     function __construct()
     {
         try {
-
-            // Get database constants
-
-
             //Instantiate a database object
             $this->cnxn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
         } catch (PDOException $e) {
-            echo 'this happened';
             echo $e->getMessage();
         }
     }
 
+    /**
+     * Adds a row to the members table. Returns the added row.
+     *
+     * @param $fname first name
+     * @param $lname last name
+     * @param $age age
+     * @param $gender gender
+     * @param $phone phone
+     * @param $email email
+     * @param $state state
+     * @param $seeking gender seeking
+     * @param $bio biography
+     * @param $premium premium
+     * @param $image profile picture
+     * @param $interests member interests
+     * @return array returns the added row
+     */
     public function addRow($fname, $lname, $age, $gender, $phone, $email, $state,
                                     $seeking, $bio, $premium, $image, $interests)
     {
@@ -80,6 +105,11 @@ class Database
         return $result;
     }
 
+    /**
+     * Retrieves the entire Members table.
+     *
+     * @return array the members table
+     */
     public function selectStar() {
         //1. define the query
         $sql = "SELECT * FROM Members ORDER BY lname";
