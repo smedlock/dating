@@ -43,12 +43,12 @@ class Member
     function __construct($fname, $lname, $age, $gender,$phone,
                                 $email, $state, $seeking, $bio)
     {
-        $this->fname = $fname;
-        $this->lname = $lname;
+        $this->setFName($fname);
+        $this->setLName($lname);
         $this->age = $age;
         $this->gender = $gender;
-        $this->phone = $phone;
-        $this->email = $email;
+        $this->setPhone($phone);
+        $this->setEmail($email);
         $this->state = $state;
         $this->seeking = $seeking;
         $this->bio = $bio;
@@ -65,13 +65,18 @@ class Member
     }
 
     /**
-     * sets the first name of the member
+     * sets the first name of the member. The name must contain only letters.
      *
      * @param $fname the first name to update the member to
      */
     public function setFName($fname)
     {
-        $this->fname = $fname;
+        $regex = '/^[a-z]+$/i';
+        if (preg_match($regex, $fname)) {
+            $this->fname = $fname;
+        } else {
+            $this->fname = '';
+        }
     }
 
     /**
@@ -85,13 +90,18 @@ class Member
     }
 
     /**
-     * sets the last name of the member
+     * sets the last name of the member. The name must contain only letters.
      *
      * @param $lname the last name to update the member to
      */
     public function setLName($lname)
     {
-        $this->lname = $lname;
+        $regex = '/^[a-z]+$/i';
+        if (preg_match($regex, $lname)) {
+            $this->lname = $lname;
+        } else {
+            $this->lname = '';
+        }
     }
 
     /**
@@ -145,13 +155,19 @@ class Member
     }
 
     /**
-     * sets the phone number of the member.
+     * sets the phone number of the member. The phone number must be of
+     * the format 'xxx-xxx-xxxx'.
      *
      * @param $phone the phone number to update for the member
      */
     public function setPhone($phone)
     {
-        $this->phone = $phone;
+        $regex = '/^\d{3}-?\d{3}-?\d{4}$/i';
+        if (preg_match($regex, $phone)) {
+            $this->phone = $phone;
+        } else {
+            $this->phone = '';
+        }
     }
 
     /**
@@ -165,13 +181,21 @@ class Member
     }
 
     /**
-     * sets the email address for the member
+     * sets the email address for the member. The email must be valid.
+     * A valid email contains any non-white space characters before '@',
+     * then a domain that is alphabetic followed by a single period and
+     * 3 more alphabetic characters.
      *
      * @param $email the email address to update for the member
      */
     public function setEmail($email)
     {
-        $this->email = $email;
+        $regex = '/^\S+@[a-z]+.[a-z]{3}$/i';
+        if (preg_match($regex, $email)) {
+            $this->email = $email;
+        } else {
+            $this->email = '';
+        }
     }
 
     /**
