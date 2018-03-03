@@ -12,6 +12,23 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <link rel="stylesheet" href="http://smedlock.greenriverdev.com/328/dating/styles/styles.css" type="text/css">
     <link rel="stylesheet" href="http://smedlock.greenriverdev.com/328/dating/styles/personal-info.css" type="text/css">
+    <style>
+        table {
+            width: 100%;
+        }
+
+        tr {
+            border-bottom: 1px solid lightgrey;
+        }
+
+        td, th {
+            white-space: nowrap;
+        }
+
+        .toprow {
+            border-bottom: 2px solid lightgrey;
+        }
+    </style>
 
 </head>
 
@@ -21,7 +38,7 @@
     <h2 class="font-weight-bold mb-4">My Dating Site</h2>
     <h3 class="font-weight-bold">Membership</h3>
     <table>
-        <tr>
+        <tr class="toprow">
             <th>ID</th>
             <th>Name</th>
             <th>Age</th>
@@ -43,25 +60,17 @@
                 <td>{{ @idiv['state'] }}</td>
                 <td>{{ @idiv['gender'] }}</td>
                 <td>{{ @idiv['seeking'] }}</td>
-                <td>{{ @idiv['premium'] }}</td>
+                <td>
+                    <input type="checkbox"
+                        <check if="{{ @idiv['premium'] == 1 }}">
+                            checked
+                        </check>
+                    >
+                </td>
                 <td>{{ @idiv['interests'] }}</td>
-                <!--
-                <repeat group="{{ @idiv }}" key="{{ @jkey }}" value="{{ @jdiv }}">
-                    <td>{{ @jdiv }}</td>
-                </repeat>
-                -->
             </tr>
         </repeat>
     </table>
-    <!--<div class="row">
-        <div class="col text-center mt-4">
-            <h1 class="font-weight-bold">My Dating Website</h1>
-
-        </div>
-        <div class="col">
-
-        </div>
-    </div>-->
 </div>
 
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
