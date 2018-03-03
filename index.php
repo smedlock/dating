@@ -2,6 +2,7 @@
 
 //Require the autoload file
 require_once('vendor/autoload.php');
+require_once("/home/smedlock/config.php");
 
 //Start the session
 session_start();
@@ -11,6 +12,8 @@ $f3 = Base::instance();
 
 //Set debug level
 $f3->set('DEBUG', 3);
+
+$database = new Database();
 
 //Define a default route
 $f3->route('GET /', function() {
@@ -142,24 +145,59 @@ $f3->route('GET|POST /profile-summary', function($f3) {
     // check for form validity
     if ($isValid) {
 
+        // Initialize variables for fat free and database
+        $fname = $newMember->getFname();
+        $lname = $newMember->getLName();
+        $age = $newMember->getAge();
+        $gender = $newMember->getGender();
+        $phone = $newMember->getPhone();
+        $email = $newMember->getEmail();
+        $state = $newMember->getState();
+        $seeking = $newMember->getSeeking();
+        $bio = $newMember->getBio();
+        $image = '';
+        $premium = 0;
+        $interests = '';
+
         if (get_class($newMember) == "PremiumMember") {
-            $f3->set('indoor', $newMember->getInDoorInterests());
-            $f3->set('outdoor', $newMember->getOutDoorInterests());
+            $premium = 1;
+            $indoorInterests = $newMember->getInDoorInterests();
+            $outdoorInterests = $newMember->getOutDoorInterests();
+            $f3->set('indoor', $indoorInterests);
+            $f3->set('outdoor', $outdoorInterests);
+            if (isset($indoorInterests)) {
+                foreach ($indoorInterests as $key => $indoorInterest) {
+                    $interests .= $indoorInterest . ', ';
+                }
+            }
+            if (isset($outdoorInterests)) {
+                $interests .= $outdoorInterests[0];
+                for ($i = 1; $i < sizeof($outdoorInterests); $i++) {
+                    $interests .= ', ' . $outdoorInterests[$i];
+                }
+            }
+
         }
 
-        $f3->set('firstName', $newMember->getFName());
-        $f3->set('lastName', $newMember->getLName());
-        $f3->set('gender', $newMember->getGender());
-        $f3->set('age', $newMember->getAge());
-        $f3->set('phone', $newMember->getPhone());
-        $f3->set('email', $newMember->getEmail());
-        $f3->set('state', $newMember->getState());
-        $f3->set('seeking', $newMember->getSeeking());
-        $f3->set('biography', $newMember->getBio());
+        $f3->set('firstName', $fname);
+        $f3->set('lastName', $lname);
+        $f3->set('gender', $gender);
+        $f3->set('age', $age);
+        $f3->set('phone', $phone);
+        $f3->set('email', $email);
+        $f3->set('state', $state);
+        $f3->set('seeking', $seeking);
+        $f3->set('biography', $bio);
 
         if (isset($_FILES['fileToUpload'])) {
             include('model/upload-image.php');
+            $image = $_SESSION['profilePicture'];
         }
+
+        //$fname, $lname, $age, $gender, $phone, $email, $state, $seeking, $bio, $premium, $image, $interests
+        global $database;
+        $database->addRow($fname, $lname, $age, $gender, $phone, $email,
+                    $state, $seeking, $bio, $premium, $image, $interests);
 
         echo $template->render('pages/profile-summary.html');
     } else {

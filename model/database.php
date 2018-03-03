@@ -12,11 +12,11 @@ CREATE TABLE Members (
     fname varchar(30) NOT NULL,
     lname varchar(40) NOT NULL,
     age tinyint NOT NULL,
-    gender tinyint,
+    gender varchar(10),
     phone varchar(20) NOT NULL,
     email varchar(60),
     state varchar(30),
-    seeking tinyint,
+    seeking varchar(10),
     bio varchar(2000),
     premium tinyint NOT NULL,
     image varchar(100),
@@ -61,11 +61,11 @@ class Database
         $statement->bindParam(':fname', $fname, PDO::PARAM_STR);
         $statement->bindParam(':lname', $lname, PDO::PARAM_STR);
         $statement->bindParam(':age', $age, PDO::PARAM_INT);
-        $statement->bindParam(':gender', $gender, PDO::PARAM_INT);
+        $statement->bindParam(':gender', $gender, PDO::PARAM_STR);
         $statement->bindParam(':phone', $phone, PDO::PARAM_STR);
         $statement->bindParam(':email', $email, PDO::PARAM_STR);
         $statement->bindParam(':state', $state, PDO::PARAM_STR);
-        $statement->bindParam(':seeking', $seeking, PDO::PARAM_INT);
+        $statement->bindParam(':seeking', $seeking, PDO::PARAM_STR);
         $statement->bindParam(':bio', $bio, PDO::PARAM_STR);
         $statement->bindParam(':premium', $premium, PDO::PARAM_INT);
         $statement->bindParam(':image', $image, PDO::PARAM_STR);
