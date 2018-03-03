@@ -79,4 +79,23 @@ class Database
         //print_r($result);
         return $result;
     }
+
+    public function selectStar() {
+        //1. define the query
+        $sql = "SELECT * FROM Members ORDER BY lname";
+
+        //2. prepare the statement
+        $statement = $this->cnxn->prepare($sql);
+
+        //3. bind parameters
+
+        //4. execute the statement
+        $statement->execute();
+
+        //5. return the result
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        //print_r($result);
+        return $result;
+    }
 }

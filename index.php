@@ -13,6 +13,7 @@ $f3 = Base::instance();
 //Set debug level
 $f3->set('DEBUG', 3);
 
+//Create the database connection
 $database = new Database();
 
 //Define a default route
@@ -21,7 +22,15 @@ $f3->route('GET /', function() {
     echo $template->render('pages/home.html');
 });
 
-$f3->route('GET /admin', function() {
+$f3->route('GET /admin', function($f3) {
+
+    //Get the Members table from the database
+    global $database;
+    $result = $database->selectStar();
+
+    //Set the Members table to a fat free variable
+    $f3->set('result', $result);
+
     $template = new Template;
     echo $template->render('pages/admin.html');
 });

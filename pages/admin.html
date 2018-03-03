@@ -18,7 +18,42 @@
 <body>
 <include href="pages/navigation.html" />
 <div id="page" class="container mt-4">
-    <div class="row">
+    <h2 class="font-weight-bold mb-4">My Dating Site</h2>
+    <h3 class="font-weight-bold">Membership</h3>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>State</th>
+            <th>Gender</th>
+            <th>Seeking</th>
+            <th>Premium</th>
+            <th>Interests</th>
+        </tr>
+        <repeat group="{{ @result }}" key="{{ @ikey }}" value="{{ @idiv }}">
+            <tr>
+                <td>{{ @idiv['member_id'] }}</td>
+                <td>{{ @idiv['fname'] }} {{ @idiv['lname'] }}</td>
+                <td>{{ @idiv['age'] }}</td>
+                <td>{{ @idiv['phone'] }}</td>
+                <td>{{ @idiv['email'] }}</td>
+                <td>{{ @idiv['state'] }}</td>
+                <td>{{ @idiv['gender'] }}</td>
+                <td>{{ @idiv['seeking'] }}</td>
+                <td>{{ @idiv['premium'] }}</td>
+                <td>{{ @idiv['interests'] }}</td>
+                <!--
+                <repeat group="{{ @idiv }}" key="{{ @jkey }}" value="{{ @jdiv }}">
+                    <td>{{ @jdiv }}</td>
+                </repeat>
+                -->
+            </tr>
+        </repeat>
+    </table>
+    <!--<div class="row">
         <div class="col text-center mt-4">
             <h1 class="font-weight-bold">My Dating Website</h1>
 
@@ -26,7 +61,7 @@
         <div class="col">
 
         </div>
-    </div>
+    </div>-->
 </div>
 
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
